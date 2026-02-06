@@ -38,7 +38,7 @@ The site uses a custom domain: **card.hnz-cpa.com**
 
 Three pieces make the custom domain work:
 
-1. **DNS (Wix)**: A CNAME record for `card` pointing to `israelzablianov.github.io`
+1. **DNS**: A CNAME record for `card` pointing to `israelzablianov.github.io`
 2. **`public/CNAME`**: Contains `card.hnz-cpa.com` -- Vite copies this to `dist/` on build, and GitHub Pages reads it to configure the domain
 3. **GitHub Pages settings**: Custom domain set via API with HTTPS enforced
 
@@ -50,7 +50,7 @@ If you ever remove the custom domain and go back to the default `username.github
 
 ### Changing the Custom Domain
 
-1. Update the DNS record at your provider (Wix)
+1. Update the DNS record at your provider
 2. Update `public/CNAME` with the new domain
 3. Run: `gh api repos/IsraelZablianov/hnz/pages -X PUT -f cname="new.domain.com"`
 4. Push to `main` to trigger a redeploy
@@ -68,7 +68,7 @@ If you ever remove the custom domain and go back to the default `username.github
 
 ### The Problem
 
-The developer's machine uses a corporate npm registry (Wix) configured in the global `~/.npmrc`. GitHub Actions runners can't access this private registry.
+The developer's machine uses a corporate npm registry configured in the global `~/.npmrc`. GitHub Actions runners can't access this private registry.
 
 ### The Solution
 
@@ -87,7 +87,8 @@ The CI workflow explicitly sets the public registry in two places:
 ```
 
 This way:
-- **Locally**: `npm install` uses the Wix registry from `~/.npmrc` (no project `.npmrc` needed)
+
+- **Locally**: `npm install` uses the registry from `~/.npmrc` (no project `.npmrc` needed)
 - **CI**: `npm install` uses the public registry via the `--registry` flag
 
 ### Lock File

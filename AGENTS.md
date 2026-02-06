@@ -93,10 +93,10 @@ const SITE = "https://www.hnz-cpa.com";
 
 - **Live URL**: [card.hnz-cpa.com](https://card.hnz-cpa.com)
 - **Auto-deploy**: Push to `main` triggers GitHub Actions workflow
-- **Custom domain**: `public/CNAME` contains `card.hnz-cpa.com`; DNS via Wix
+- **Custom domain**: `public/CNAME` contains `card.hnz-cpa.com`; DNS via Some registrar
 - **Base path**: `vite.config.js` sets `base: "/"` (root, because custom domain)
 - **Build output**: `dist/` directory (gitignored)
-- **Registry**: CI uses public npm; local uses Wix registry from `~/.npmrc`
+- **Registry**: CI uses public npm; local uses other registry from `~/.npmrc`
 - **Full details**: See [docs/deployment.md](docs/deployment.md)
 
 ---

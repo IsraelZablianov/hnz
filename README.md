@@ -56,7 +56,8 @@ Deploys to GitHub Pages automatically via GitHub Actions on every push to `main`
 ### Custom Domain
 
 The site is served from `card.hnz-cpa.com` via:
-- DNS CNAME record (managed in Wix)
+
+- DNS CNAME record
 - `public/CNAME` file in the repo
 - HTTPS enforced by GitHub
 
