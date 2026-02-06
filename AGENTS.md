@@ -80,17 +80,24 @@ const SITE = "https://www.hnz-cpa.com";
 | `src/main.jsx`                 | React entry point                                          |
 | `index.html`                   | HTML shell with RTL, meta tags, Google Fonts               |
 | `public/vcard.vcf`             | vCard for "Add to Contacts" action                         |
-| `vite.config.js`               | Vite config with `base` for GitHub Pages                   |
+| `public/CNAME`                 | Custom domain config for GitHub Pages                      |
+| `vite.config.js`               | Vite config with `base` for custom domain                  |
 | `.github/workflows/deploy.yml` | CI/CD — build & deploy to GitHub Pages                     |
+| `docs/deployment.md`           | Deployment, custom domain, registry, troubleshooting       |
+| `docs/development.md`          | Local dev setup, architecture, conventions                 |
+| `docs/animations.md`           | CSS animations reference and patterns                      |
 
 ---
 
 ## Deployment
 
+- **Live URL**: [card.hnz-cpa.com](https://card.hnz-cpa.com)
 - **Auto-deploy**: Push to `main` triggers GitHub Actions workflow
-- **Base path**: `vite.config.js` sets `base: "/hnz/"` — update if repo name changes
+- **Custom domain**: `public/CNAME` contains `card.hnz-cpa.com`; DNS via Wix
+- **Base path**: `vite.config.js` sets `base: "/"` (root, because custom domain)
 - **Build output**: `dist/` directory (gitignored)
-- **GitHub Pages source**: Set to "GitHub Actions" in repo Settings > Pages
+- **Registry**: CI uses public npm; local uses Wix registry from `~/.npmrc`
+- **Full details**: See [docs/deployment.md](docs/deployment.md)
 
 ---
 

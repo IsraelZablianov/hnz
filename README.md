@@ -49,7 +49,16 @@ npm run preview
 
 ## Deployment
 
-This project deploys to **GitHub Pages** automatically via GitHub Actions on every push to `main`.
+Live at **[card.hnz-cpa.com](https://card.hnz-cpa.com)**
+
+Deploys to GitHub Pages automatically via GitHub Actions on every push to `main`.
+
+### Custom Domain
+
+The site is served from `card.hnz-cpa.com` via:
+- DNS CNAME record (managed in Wix)
+- `public/CNAME` file in the repo
+- HTTPS enforced by GitHub
 
 ### Manual Deploy
 
@@ -58,11 +67,7 @@ npm run build
 npm run deploy
 ```
 
-### GitHub Pages Setup
-
-1. Go to **Settings > Pages** in your GitHub repo
-2. Set **Source** to "GitHub Actions"
-3. Push to `main` — the workflow handles the rest
+See [docs/deployment.md](docs/deployment.md) for full deployment details, custom domain management, and troubleshooting.
 
 ## Project Structure
 
@@ -71,12 +76,18 @@ hnz/
 ├── .cursor/rules/          # AI agent rules (Cursor IDE)
 ├── .github/workflows/      # CI/CD pipelines
 │   └── deploy.yml          # GitHub Pages deployment
+├── docs/                   # Documentation
+│   ├── deployment.md       # Deployment & infrastructure
+│   ├── development.md      # Development guide & conventions
+│   └── animations.md       # CSS animations reference
 ├── public/
+│   ├── CNAME               # Custom domain (card.hnz-cpa.com)
 │   └── vcard.vcf           # Contact card file
 ├── src/
 │   ├── App.jsx             # Main application component
 │   ├── main.jsx            # React entry point
 │   └── styles.css          # All styles (CSS custom properties)
+├── AGENTS.md               # AI agent guidelines
 ├── index.html              # HTML entry (RTL, Hebrew)
 ├── vite.config.js          # Vite configuration
 └── package.json            # Dependencies & scripts
