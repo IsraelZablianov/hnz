@@ -1,17 +1,19 @@
 # HNZ - Digital Business Card
 
-A sleek, mobile-first digital business card for **Hila Nach Zevlianov (HNZ)**, Certified Public Accountant.
+A sleek, mobile-first digital business card for **Hila Noah Zablianov (HNZ)**, Certified Public Accountant.
 
 Built with React 19 + Vite, optimized for instant loading and native-like interactions on mobile devices. Full Hebrew RTL support.
 
 ## Features
 
-- **One-tap actions** — Call, WhatsApp, email, save contact, visit website, share
+- **One-tap actions** — Call, WhatsApp, save contact, Facebook, Instagram, share
 - **Lead capture form** — Collects name & phone, sends via WhatsApp
 - **vCard download** — Add to contacts instantly
+- **Social links** — Direct links to Facebook and Instagram profiles
 - **Web Share API** — Native sharing with clipboard fallback
 - **Smooth animations** — Fade-in, staggered reveals, subtle hover effects
-- **PWA-ready** — Mobile-first responsive design
+- **SEO optimized** — Open Graph, Twitter Cards, JSON-LD structured data, sitemap
+- **PWA-ready** — Mobile-first responsive design with favicons and web manifest
 - **Accessible** — Reduced motion support, semantic HTML
 
 ## Tech Stack
@@ -74,22 +76,34 @@ See [docs/deployment.md](docs/deployment.md) for full deployment details, custom
 
 ```
 hnz/
-├── .cursor/rules/          # AI agent rules (Cursor IDE)
-├── .github/workflows/      # CI/CD pipelines
+├── .cursor/
+│   ├── rules/              # AI agent rules (Cursor IDE)
+│   └── skills/             # AI agent skills
+├── .github/workflows/
 │   └── deploy.yml          # GitHub Pages deployment
-├── docs/                   # Documentation
+├── docs/
+│   ├── animations.md       # CSS animations reference
 │   ├── deployment.md       # Deployment & infrastructure
-│   ├── development.md      # Development guide & conventions
-│   └── animations.md       # CSS animations reference
+│   └── development.md      # Development guide & conventions
 ├── public/
+│   ├── android-chrome-*.png # Android icons (192, 512)
+│   ├── apple-touch-icon.png # iOS icon
 │   ├── CNAME               # Custom domain (card.hnz-cpa.com)
+│   ├── favicon-*.png       # Favicons (16, 32)
+│   ├── favicon.svg         # SVG favicon
+│   ├── og-image.png        # Open Graph social preview image
+│   ├── robots.txt          # Search engine crawl rules
+│   ├── site.webmanifest    # PWA manifest
+│   ├── sitemap.xml         # Sitemap for SEO
 │   └── vcard.vcf           # Contact card file
 ├── src/
+│   ├── assets/
+│   │   └── hila-hero.png   # Hero profile image
 │   ├── App.jsx             # Main application component
 │   ├── main.jsx            # React entry point
 │   └── styles.css          # All styles (CSS custom properties)
 ├── AGENTS.md               # AI agent guidelines
-├── index.html              # HTML entry (RTL, Hebrew)
+├── index.html              # HTML entry (RTL, Hebrew, JSON-LD)
 ├── vite.config.js          # Vite configuration
 └── package.json            # Dependencies & scripts
 ```
@@ -100,12 +114,17 @@ All contact information is centralized as constants at the top of `src/App.jsx`:
 
 ```javascript
 const PHONE = "0555582369";
+const PHONE_DISPLAY = "055-5582369";
+const PHONE_INTL = "972555582369";
 const EMAIL = "hila@hnz-cpa.com";
-const SITE = "https://www.hnz-cpa.com";
+const FACEBOOK = "https://www.facebook.com/hylh.nh/";
+const INSTAGRAM = "https://www.instagram.com/hila_noah_zablianov/";
 const NAME_HE = "הילה נח זבליאנוב";
+const NAME_EN = "Hila Noah Zablianov";
+const TITLE_HE = "משרד רואי חשבון";
 ```
 
-Update these values and the `public/vcard.vcf` file to customize for a different person.
+Update these values, `public/vcard.vcf`, and the structured data in `index.html` to customize for a different person.
 
 ## License
 

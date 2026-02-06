@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-Digital business card for **Hila Nach Zevlianov (HNZ)**, a Certified Public Accountant.  
+Digital business card for **Hila Noah Zablianov (HNZ)**, a Certified Public Accountant.  
 Single-page React 19 + Vite 5 app, mobile-first, Hebrew RTL, deployed to GitHub Pages.
 
 ---
@@ -23,11 +23,16 @@ Single-page React 19 + Vite 5 app, mobile-first, Hebrew RTL, deployed to GitHub 
 ## Architecture
 
 ```
-index.html          → RTL entry point (lang="he", dir="rtl")
-  └─ src/main.jsx   → React root (StrictMode)
-       └─ src/App.jsx   → Single component with all UI + logic
-            └─ src/styles.css  → All styles (variables, layout, animations)
-public/vcard.vcf    → Contact card download
+index.html               → RTL entry point (lang="he", dir="rtl", JSON-LD)
+  └─ src/main.jsx        → React root (StrictMode)
+       └─ src/App.jsx    → Single component with all UI + logic
+            ├─ src/styles.css         → All styles (variables, layout, animations)
+            └─ src/assets/hila-hero.png → Hero profile image
+public/vcard.vcf         → Contact card download
+public/og-image.png      → Social sharing preview image
+public/robots.txt        → Search engine crawl rules
+public/sitemap.xml       → Sitemap for SEO
+public/site.webmanifest  → PWA manifest
 ```
 
 - **No routing** — single-page app
@@ -45,8 +50,15 @@ All contact info lives as `const` at the top of `App.jsx`. Never hardcode contac
 
 ```javascript
 const PHONE = "0555582369";
+const PHONE_DISPLAY = "055-5582369";
+const PHONE_INTL = "972555582369";
 const EMAIL = "hila@hnz-cpa.com";
-const SITE = "https://www.hnz-cpa.com";
+const FACEBOOK = "https://www.facebook.com/hylh.nh/";
+const INSTAGRAM = "https://www.instagram.com/hila_noah_zablianov/";
+const NAME_HE = "הילה נח זבליאנוב";
+const NAME_EN = "Hila Noah Zablianov";
+const TITLE_HE = "משרד רואי חשבון";
+const WA_TEXT = "היי, אשמח לשמוע פרטים על השירותים שלך";
 ```
 
 ### Components
@@ -54,6 +66,7 @@ const SITE = "https://www.hnz-cpa.com";
 - Functional components only
 - Sub-components (e.g. `ActionIcon`) stay in the same file
 - Inline SVG icons — no icon libraries
+- Hero image imported from `src/assets/` (bundled by Vite)
 
 ### CSS
 
@@ -78,9 +91,15 @@ const SITE = "https://www.hnz-cpa.com";
 | `src/App.jsx`                  | Main component — header, actions, about, lead form, footer |
 | `src/styles.css`               | All styles — variables, layout, animations, responsiveness |
 | `src/main.jsx`                 | React entry point                                          |
-| `index.html`                   | HTML shell with RTL, meta tags, Google Fonts               |
+| `src/assets/hila-hero.png`     | Hero profile image (imported, bundled by Vite)             |
+| `index.html`                   | HTML shell with RTL, meta tags, JSON-LD, Google Fonts      |
 | `public/vcard.vcf`             | vCard for "Add to Contacts" action                         |
 | `public/CNAME`                 | Custom domain config for GitHub Pages                      |
+| `public/og-image.png`          | Open Graph / social sharing preview image                  |
+| `public/robots.txt`            | Search engine crawl rules                                  |
+| `public/site.webmanifest`      | PWA web app manifest                                       |
+| `public/sitemap.xml`           | Sitemap for SEO                                            |
+| `public/favicon.svg`           | SVG favicon                                                |
 | `vite.config.js`               | Vite config with `base` for custom domain                  |
 | `.github/workflows/deploy.yml` | CI/CD — build & deploy to GitHub Pages                     |
 | `docs/deployment.md`           | Deployment, custom domain, registry, troubleshooting       |

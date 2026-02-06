@@ -7,7 +7,7 @@ alwaysApply: true
 
 ## Project Overview
 
-Digital business card for Hila Nach Zevlianov (HNZ), a CPA. Single-page React + Vite app optimized for mobile with Hebrew RTL support.
+Digital business card for Hila Noah Zablianov (HNZ), a CPA. Single-page React + Vite app optimized for mobile with Hebrew RTL support.
 
 ## Tech Stack
 
@@ -30,15 +30,17 @@ Digital business card for Hila Nach Zevlianov (HNZ), a CPA. Single-page React + 
 
 - `src/App.jsx` — Main component with all business logic
 - `src/styles.css` — All styles with CSS variables
+- `src/assets/hila-hero.png` — Hero profile image (imported by App.jsx)
 - `public/vcard.vcf` — vCard contact file
-- `index.html` — Entry point (RTL, Hebrew lang)
+- `index.html` — Entry point (RTL, Hebrew lang, JSON-LD structured data)
 
 ## Contact Constants
 
-Phone, email, and website are defined as constants at the top of `App.jsx`. Always use these constants, never hardcode contact info elsewhere.
+Phone, email, social links, and display names are defined as constants at the top of `App.jsx`. Always use these constants, never hardcode contact info elsewhere.
 
 ## Deployment
 
-- `base` in `vite.config.js` must match the GitHub repo name for GitHub Pages
+- Custom domain `card.hnz-cpa.com` — `base: "/"` in `vite.config.js`
 - Build output goes to `dist/`
 - GitHub Actions workflow at `.github/workflows/deploy.yml`
+- `public/CNAME` contains the custom domain
