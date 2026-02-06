@@ -187,7 +187,7 @@ export default function App() {
         <img
           className="hero__image"
           src={hilaHero}
-          alt={`${NAME_HE} - רואי חשבון מוסמכים לעסקים קטנים ובינוניים`}
+          alt={`${NAME_HE} - משרד רואי חשבון`}
           itemProp="image"
           loading="eager"
           width="400"
