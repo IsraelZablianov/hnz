@@ -1,8 +1,8 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
-// GitHub Pages base path — change "/hnz/" to match your repo name
+// Custom domain serves from root — no base path needed
 export default defineConfig({
   plugins: [react()],
-  base: "/hnz/",
+  base: "/",
 });
