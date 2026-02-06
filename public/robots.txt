@@ -1,11 +1,11 @@
 # robots.txt for HNZ CPA Digital Business Card
-# https://israelz.github.io/hnz/
+# https://card.hnz-cpa.com/
 
 User-agent: *
 Allow: /
 
 # Sitemap location
-Sitemap: https://israelz.github.io/hnz/sitemap.xml
+Sitemap: https://card.hnz-cpa.com/sitemap.xml
 
 # Crawl-delay (optional, be polite to servers)
 Crawl-delay: 1
