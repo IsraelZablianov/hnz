@@ -136,29 +136,45 @@ export default function App() {
   };
 
   return (
-    <div className="card-page">
+    <main
+      className="card-page"
+      itemScope
+      itemType="https://schema.org/AccountingService"
+    >
       {/* ── Top Header / Logo Area ── */}
-      <header className="top-header">
+      <header className="top-header" role="banner">
         <div className="top-header__brand">
           <div className="top-header__he">
-            <span className="top-header__name-he">{NAME_HE}</span>
-            <span className="top-header__title-he">{TITLE_HE}</span>
+            <span className="top-header__name-he" itemProp="name">
+              {NAME_HE}
+            </span>
+            <span className="top-header__title-he" itemProp="description">
+              {TITLE_HE}
+            </span>
           </div>
-          <div className="top-header__logo">
+          <div className="top-header__logo" aria-hidden="true">
             <span className="top-header__initials">HNZ</span>
           </div>
           <div className="top-header__en">
-            <span className="top-header__name-en">{NAME_EN}</span>
+            <span className="top-header__name-en" itemProp="alternateName">
+              {NAME_EN}
+            </span>
             <span className="top-header__role">C.P.A</span>
           </div>
         </div>
-        <p className="top-header__services">
-          עצמאיים ובעלי עסקים קטנים ובינוניים ◇ הנהלת חשבונות דיגיטלית
+        <p className="top-header__services" itemProp="description">
+          עצמאים ובעלי עסקים ◇ פתיחת תיקים ◇ הנהלת חשבונות דיגיטלית
           <br />
           דיווחים שוטפים ◇ ייעוץ וליווי שוטף ◇ החזרי מס לשכירים
         </p>
         <p className="top-header__contact">
-          {EMAIL} | {PHONE_DISPLAY}
+          <a href={`mailto:${EMAIL}`} itemProp="email" aria-label="שלח אימייל">
+            {EMAIL}
+          </a>{" "}
+          |{" "}
+          <a href={`tel:${PHONE}`} itemProp="telephone" aria-label="התקשר">
+            {PHONE_DISPLAY}
+          </a>
         </p>
       </header>
 
@@ -170,7 +186,11 @@ export default function App() {
         <img
           className="hero__image"
           src={`${import.meta.env.BASE_URL}hila-hero.png`}
-          alt={NAME_HE}
+          alt={`${NAME_HE} - רואת חשבון מוסמכת לעסקים קטנים ובינוניים`}
+          itemProp="image"
+          loading="eager"
+          width="400"
+          height="480"
         />
         <button className="hero__share" onClick={handleShare}>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
@@ -182,7 +202,7 @@ export default function App() {
       </div>
 
       {/* ── Action Buttons Grid (3 columns) ── */}
-      <div className="actions">
+      <nav className="actions" aria-label="פעולות מהירות">
         {actions.map((a) =>
           a.href === "#share" ? (
             <button key={a.label} className="action" onClick={handleShare}>
@@ -204,42 +224,59 @@ export default function App() {
             </a>
           ),
         )}
-      </div>
+      </nav>
 
       {/* ── Dark Section: Name + About ── */}
-      <div className="dark-section">
-        <h1 className="dark-section__name">
+      <section className="dark-section" aria-labelledby="about-heading">
+        <h1 className="dark-section__name" itemProp="name">
           {NAME_HE} - {TITLE_HE}
         </h1>
 
-        <div className="dark-section__about">
-          <h2>אודות</h2>
+        <article className="dark-section__about">
+          <h2 id="about-heading">אודות</h2>
           <div className="dark-section__divider" />
-          <p>
-            עצמאיים ובעלי עסקים קטנים ובינוניים ◇ הנהלת חשבונות דיגיטלית ◇
-            דיווחים שוטפים לרשויות ◇ פתיחת תיקים ◇ ייעוץ שוטף ◇ החזרי מס
-            לשכירים ◇ הצהרות הון ◇ דוחות שנתיים
+          <p itemProp="description">
+            עצמאים ובעלי עסקים קטנים ובינוניים ◇ הנהלת חשבונות דיגיטלית ◇
+            דיווחים שוטפים לרשויות ◇ פתיחת תיקים ◇ ייעוץ שוטף ◇ החזרי מס לשכירים
+            ◇ הצהרות הון ◇ דוחות שנתיים
           </p>
-        </div>
-      </div>
+        </article>
+      </section>
 
       {/* ── Lead Form ── */}
-      <div className="lead">
+      <section className="lead" aria-labelledby="contact-form-heading">
+        <h2 id="contact-form-heading" className="visually-hidden">
+          השאירו פרטים ונחזור אליכם
+        </h2>
         {!sent ? (
-          <form className="lead__form" onSubmit={handleSubmit}>
+          <form
+            className="lead__form"
+            onSubmit={handleSubmit}
+            aria-label="טופס יצירת קשר"
+          >
+            <label htmlFor="lead-name" className="visually-hidden">
+              שם
+            </label>
             <input
+              id="lead-name"
               type="text"
               placeholder="שם"
               required
+              autoComplete="name"
               value={formData.name}
               onChange={(e) =>
                 setFormData((d) => ({ ...d, name: e.target.value }))
               }
             />
+            <label htmlFor="lead-phone" className="visually-hidden">
+              טלפון
+            </label>
             <input
+              id="lead-phone"
               type="tel"
               placeholder="טלפון"
               required
+              autoComplete="tel"
               value={formData.phone}
               onChange={(e) =>
                 setFormData((d) => ({ ...d, phone: e.target.value }))
@@ -250,9 +287,11 @@ export default function App() {
             </button>
           </form>
         ) : (
-          <p className="lead__thanks">תודה! נחזור אליך בהקדם 🙏</p>
+          <p className="lead__thanks" role="status" aria-live="polite">
+            תודה! נחזור אליך בהקדם 🙏
+          </p>
         )}
-      </div>
+      </section>
 
       {/* ── Or Call ── */}
       <div className="call-bar">
@@ -275,11 +314,16 @@ export default function App() {
       </div>
 
       {/* ── Footer ── */}
-      <footer className="card-footer">
+      <footer className="card-footer" role="contentinfo">
         <p>
           © {new Date().getFullYear()} {NAME_HE} רו״ח
         </p>
+        {/* Hidden links for SEO - schema.org sameAs */}
+        <div className="visually-hidden" itemProp="sameAs">
+          <a href={FACEBOOK}>Facebook</a>
+          <a href={INSTAGRAM}>Instagram</a>
+        </div>
       </footer>
-    </div>
+    </main>
   );
 }
