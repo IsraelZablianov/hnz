@@ -1,0 +1,26 @@
+---
+description: CSS styling conventions
+globs: "**/*.css"
+alwaysApply: false
+---
+
+# CSS Conventions
+
+- All theme values in `:root` CSS custom properties
+- BEM-like naming: `.block__element` (no modifiers needed yet)
+- Mobile-first: base styles for mobile, `@media (min-width: 500px)` for desktop
+- Use `transition` for interactive feedback (transform, opacity)
+- `backdrop-filter` for glassmorphism effects
+- Prefer `grid` for layouts, `flex` for alignment
+- Animations: use `@keyframes` with `prefers-reduced-motion` media query for accessibility
+
+## Color Palette
+
+```css
+--dark: #3a3a3a; /* Primary dark */
+--bg: #f0ede8; /* Page background */
+--surface: #ffffff; /* Card surfaces */
+--text: #222; /* Primary text */
+--text-muted: #666; /* Secondary text */
+--accent: #6a6a6a; /* Accent elements */
+```

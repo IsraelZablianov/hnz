@@ -1,0 +1,285 @@
+import { useState } from "react";
+
+const PHONE = "0555582369";
+const PHONE_DISPLAY = "055-5582369";
+const PHONE_INTL = "972555582369";
+const EMAIL = "hila@hnz-cpa.com";
+const FACEBOOK = "https://www.facebook.com/hylh.nh/";
+const INSTAGRAM = "https://www.instagram.com/hila_noah_zablianov/";
+const NAME_HE = "הילה נח זבליאנוב";
+const NAME_EN = "Hila Noah Zablianov";
+const TITLE_HE = "משרד רואת חשבון";
+const WA_TEXT = "היי, אשמח לשמוע פרטים על השירותים שלך";
+
+const actions = [
+  {
+    label: "הוסף לאנשי הקשר",
+    icon: "person-add",
+    href: `${import.meta.env.BASE_URL}vcard.vcf`,
+  },
+  {
+    label: "התקשר עכשיו",
+    icon: "phone",
+    href: `tel:${PHONE}`,
+  },
+  {
+    label: "שלח וואטסאפ",
+    icon: "whatsapp",
+    href: `https://wa.me/${PHONE_INTL}?text=${encodeURIComponent(WA_TEXT)}`,
+  },
+  {
+    label: "לפייסבוק",
+    icon: "facebook",
+    href: FACEBOOK,
+  },
+  {
+    label: "לאינסטגרם",
+    icon: "instagram",
+    href: INSTAGRAM,
+  },
+  {
+    label: "שתף כרטיס",
+    icon: "share",
+    href: "#share",
+  },
+];
+
+function ActionIcon({ icon }) {
+  const icons = {
+    "person-add": (
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+        <circle cx="9" cy="7" r="4" />
+        <line x1="19" y1="8" x2="19" y2="14" />
+        <line x1="22" y1="11" x2="16" y2="11" />
+      </svg>
+    ),
+    phone: (
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
+      </svg>
+    ),
+    whatsapp: (
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z" />
+      </svg>
+    ),
+    facebook: (
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+      </svg>
+    ),
+    instagram: (
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+      </svg>
+    ),
+    share: (
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <circle cx="18" cy="5" r="3" />
+        <circle cx="6" cy="12" r="3" />
+        <circle cx="18" cy="19" r="3" />
+        <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
+        <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
+      </svg>
+    ),
+  };
+  return <span className="action__icon">{icons[icon]}</span>;
+}
+
+function handleShare() {
+  if (navigator.share) {
+    navigator.share({
+      title: NAME_HE,
+      text: `${NAME_HE} - ${TITLE_HE}`,
+      url: window.location.href,
+    });
+  } else {
+    navigator.clipboard.writeText(window.location.href);
+    alert("הקישור הועתק!");
+  }
+}
+
+export default function App() {
+  const [formData, setFormData] = useState({ name: "", phone: "" });
+  const [sent, setSent] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const msg = `שלום, השארתי פרטים בכרטיס הביקור:\nשם: ${formData.name}\nטלפון: ${formData.phone}`;
+    window.open(
+      `https://wa.me/${PHONE_INTL}?text=${encodeURIComponent(msg)}`,
+      "_blank",
+    );
+    setSent(true);
+  };
+
+  return (
+    <div className="card-page">
+      {/* ── Top Header / Logo Area ── */}
+      <header className="top-header">
+        <div className="top-header__brand">
+          <div className="top-header__he">
+            <span className="top-header__name-he">{NAME_HE}</span>
+            <span className="top-header__title-he">{TITLE_HE}</span>
+          </div>
+          <div className="top-header__logo">
+            <span className="top-header__initials">HNZ</span>
+          </div>
+          <div className="top-header__en">
+            <span className="top-header__name-en">{NAME_EN}</span>
+            <span className="top-header__role">C.P.A</span>
+          </div>
+        </div>
+        <p className="top-header__services">
+          עצמאיים ובעלי עסקים קטנים ובינוניים ◇ הנהלת חשבונות דיגיטלית
+          <br />
+          דיווחים שוטפים ◇ ייעוץ וליווי שוטף ◇ החזרי מס לשכירים
+        </p>
+        <p className="top-header__contact">
+          {EMAIL} | {PHONE_DISPLAY}
+        </p>
+      </header>
+
+      {/* ── Hero Image with Share Overlay ── */}
+      <div className="hero">
+        <span className="hero__watermark" aria-hidden="true">
+          HNZ
+        </span>
+        <img
+          className="hero__image"
+          src={`${import.meta.env.BASE_URL}hila-hero.png`}
+          alt={NAME_HE}
+        />
+        <button className="hero__share" onClick={handleShare}>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z" />
+          </svg>
+          <span>שתף</span>
+          <span>ב-</span>
+        </button>
+      </div>
+
+      {/* ── Action Buttons Grid (3 columns) ── */}
+      <div className="actions">
+        {actions.map((a) =>
+          a.href === "#share" ? (
+            <button key={a.label} className="action" onClick={handleShare}>
+              <ActionIcon icon={a.icon} />
+              <span className="action__label">{a.label}</span>
+            </button>
+          ) : (
+            <a
+              key={a.label}
+              href={a.href}
+              className="action"
+              target={a.href.startsWith("http") ? "_blank" : undefined}
+              rel={
+                a.href.startsWith("http") ? "noopener noreferrer" : undefined
+              }
+            >
+              <ActionIcon icon={a.icon} />
+              <span className="action__label">{a.label}</span>
+            </a>
+          ),
+        )}
+      </div>
+
+      {/* ── Dark Section: Name + About ── */}
+      <div className="dark-section">
+        <h1 className="dark-section__name">
+          {NAME_HE} - {TITLE_HE}
+        </h1>
+
+        <div className="dark-section__about">
+          <h2>אודות</h2>
+          <div className="dark-section__divider" />
+          <p>
+            עצמאיים ובעלי עסקים קטנים ובינוניים ◇ הנהלת חשבונות דיגיטלית ◇
+            דיווחים שוטפים לרשויות ◇ פתיחת תיקים ◇ ייעוץ שוטף ◇ החזרי מס
+            לשכירים ◇ הצהרות הון ◇ דוחות שנתיים
+          </p>
+        </div>
+      </div>
+
+      {/* ── Lead Form ── */}
+      <div className="lead">
+        {!sent ? (
+          <form className="lead__form" onSubmit={handleSubmit}>
+            <input
+              type="text"
+              placeholder="שם"
+              required
+              value={formData.name}
+              onChange={(e) =>
+                setFormData((d) => ({ ...d, name: e.target.value }))
+              }
+            />
+            <input
+              type="tel"
+              placeholder="טלפון"
+              required
+              value={formData.phone}
+              onChange={(e) =>
+                setFormData((d) => ({ ...d, phone: e.target.value }))
+              }
+            />
+            <button type="submit" className="lead__submit">
+              שלח
+            </button>
+          </form>
+        ) : (
+          <p className="lead__thanks">תודה! נחזור אליך בהקדם 🙏</p>
+        )}
+      </div>
+
+      {/* ── Or Call ── */}
+      <div className="call-bar">
+        <span>או התקשרו:</span>
+        <a href={`tel:${PHONE}`} className="call-bar__phone">
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
+          </svg>
+          {PHONE_DISPLAY}
+        </a>
+      </div>
+
+      {/* ── Footer ── */}
+      <footer className="card-footer">
+        <p>
+          © {new Date().getFullYear()} {NAME_HE} רו״ח
+        </p>
+      </footer>
+    </div>
+  );
+}

@@ -1,0 +1,44 @@
+---
+description: Core project conventions for the HNZ digital business card app
+alwaysApply: true
+---
+
+# HNZ Project Conventions
+
+## Project Overview
+
+Digital business card for Hila Nach Zevlianov (HNZ), a CPA. Single-page React + Vite app optimized for mobile with Hebrew RTL support.
+
+## Tech Stack
+
+- **Framework**: React 19 (functional components, hooks only)
+- **Build**: Vite 5 (ESM modules)
+- **Styling**: Plain CSS with CSS custom properties (no CSS frameworks)
+- **Language**: JavaScript/JSX (no TypeScript)
+- **Deployment**: GitHub Pages via GitHub Actions
+
+## Code Style
+
+- Use `const` for constants, extract to top of file
+- Inline SVG icons (no icon libraries)
+- Hebrew strings stay in source (no i18n layer needed)
+- Mobile-first CSS with desktop media query at 500px
+- BEM-like class naming: `.block__element` pattern
+- Single-file component approach (App.jsx contains all logic)
+
+## Important Paths
+
+- `src/App.jsx` — Main component with all business logic
+- `src/styles.css` — All styles with CSS variables
+- `public/vcard.vcf` — vCard contact file
+- `index.html` — Entry point (RTL, Hebrew lang)
+
+## Contact Constants
+
+Phone, email, and website are defined as constants at the top of `App.jsx`. Always use these constants, never hardcode contact info elsewhere.
+
+## Deployment
+
+- `base` in `vite.config.js` must match the GitHub repo name for GitHub Pages
+- Build output goes to `dist/`
+- GitHub Actions workflow at `.github/workflows/deploy.yml`

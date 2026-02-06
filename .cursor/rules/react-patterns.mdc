@@ -1,0 +1,30 @@
+---
+description: React component patterns for JSX files
+globs: "**/*.jsx"
+alwaysApply: false
+---
+
+# React Patterns
+
+- Functional components only, no class components
+- Use `useState` for local state, no external state management
+- Extract reusable sub-components (e.g., `ActionIcon`) in the same file
+- Event handlers as arrow functions or named functions
+- Accessibility: use semantic HTML, proper `aria-` attributes where needed
+- RTL support: use logical CSS properties when possible
+
+## Form Handling
+
+```jsx
+// Use controlled inputs with single state object
+const [formData, setFormData] = useState({ name: "", phone: "" });
+const handleChange = (field) => (e) =>
+  setFormData((d) => ({ ...d, [field]: e.target.value }));
+```
+
+## External Links
+
+```jsx
+// Always add security attrs for external links
+<a href={url} target="_blank" rel="noopener noreferrer">
+```
