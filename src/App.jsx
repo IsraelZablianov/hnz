@@ -1,4 +1,5 @@
 import { useState } from "react";
+import hilaHero from "./assets/hila-hero.png";
 
 const PHONE = "0555582369";
 const PHONE_DISPLAY = "055-5582369";
@@ -185,7 +186,7 @@ export default function App() {
         </span>
         <img
           className="hero__image"
-          src={`${import.meta.env.BASE_URL}hila-hero.png`}
+          src={hilaHero}
           alt={`${NAME_HE} - רואת חשבון מוסמכת לעסקים קטנים ובינוניים`}
           itemProp="image"
           loading="eager"
