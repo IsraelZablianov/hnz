@@ -9,7 +9,7 @@ const FACEBOOK = "https://www.facebook.com/hylh.nh/";
 const INSTAGRAM = "https://www.instagram.com/hila_noah_zablianov/";
 const NAME_HE = "הילה נח זבליאנוב";
 const NAME_EN = "Hila Noah Zablianov";
-const TITLE_HE = "משרד רואת חשבון";
+const TITLE_HE = "משרד רואי חשבון";
 const WA_TEXT = "היי, אשמח לשמוע פרטים על השירותים שלך";
 
 const actions = [
@@ -187,7 +187,7 @@ export default function App() {
         <img
           className="hero__image"
           src={hilaHero}
-          alt={`${NAME_HE} - רואת חשבון מוסמכת לעסקים קטנים ובינוניים`}
+          alt={`${NAME_HE} - רואי חשבון מוסמכים לעסקים קטנים ובינוניים`}
           itemProp="image"
           loading="eager"
           width="400"
@@ -237,8 +237,8 @@ export default function App() {
           <h2 id="about-heading">אודות</h2>
           <div className="dark-section__divider" />
           <p itemProp="description">
-            עצמאים ובעלי עסקים ◇ פתיחת תיקים ◇ הנהלת חשבונות דיגיטלית ◇
-            דיווחים שוטפים ◇ ייעוץ וליווי שוטף ◇ החזרי מס לשכירים
+            עצמאים ובעלי עסקים ◇ פתיחת תיקים ◇ הנהלת חשבונות דיגיטלית ◇ דיווחים
+            שוטפים ◇ ייעוץ וליווי שוטף ◇ החזרי מס לשכירים
           </p>
         </article>
       </section>
