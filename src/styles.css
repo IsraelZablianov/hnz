@@ -54,97 +54,186 @@ a {
 
 /* ─── Top Header ─── */
 .top-header {
+  position: relative;
   background: linear-gradient(
     180deg,
-    rgba(255, 255, 255, 0.95) 0%,
+    rgba(255, 255, 255, 0.97) 0%,
     rgba(245, 243, 238, 0.98) 100%
   );
-  padding: 28px 20px 20px;
+  padding: 24px 16px 18px;
   text-align: center;
   border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  overflow: hidden;
 }
 
-.top-header__logo {
+/* Subtle watermark behind header */
+.top-header::before {
+  content: "HNZ";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 7rem;
+  font-weight: 800;
+  color: rgba(0, 0, 0, 0.03);
+  letter-spacing: 0.15em;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ─── Header Brand Row (3 columns: Hebrew | Logo | English) ─── */
+.top-header__brand {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 14px;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
+  position: relative;
+  z-index: 1;
 }
 
-.top-header__initials {
-  display: grid;
-  place-items: center;
-  width: 54px;
-  height: 54px;
-  border-radius: 8px;
-  background: var(--dark);
-  color: #fff;
-  font-weight: 700;
-  font-size: 1.1rem;
-  letter-spacing: 0.08em;
-}
-
-.top-header__text {
+.top-header__he {
   display: flex;
   flex-direction: column;
   text-align: right;
 }
 
 .top-header__name-he {
-  font-size: 1.15rem;
+  font-size: 1.1rem;
   font-weight: 700;
   color: var(--text);
+  line-height: 1.3;
 }
 
-.top-header__name-en {
-  font-size: 0.8rem;
+.top-header__title-he {
+  font-size: 0.78rem;
   color: var(--text-muted);
   font-weight: 500;
 }
 
-.top-header__role {
-  font-size: 0.75rem;
-  color: var(--text-muted);
-  letter-spacing: 0.06em;
+.top-header__logo {
+  flex-shrink: 0;
 }
 
-.top-header__services {
-  font-size: 0.82rem;
-  color: var(--text-muted);
-  line-height: 1.7;
-  margin-bottom: 8px;
+.top-header__initials {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 8px;
+  background: var(--dark);
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: 0.08em;
 }
 
-.top-header__contact {
-  font-size: 0.78rem;
-  color: var(--accent);
+.top-header__en {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
   direction: ltr;
 }
 
-/* ─── Share Bar ─── */
-.share-bar {
+.top-header__name-en {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.top-header__role {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+  font-weight: 500;
+}
+
+.top-header__services {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 6px;
+  position: relative;
+  z-index: 1;
+}
+
+.top-header__contact {
+  font-size: 0.76rem;
+  color: var(--accent);
+  direction: ltr;
+  position: relative;
+  z-index: 1;
+}
+
+/* ─── Hero Image Section ─── */
+.hero {
+  position: relative;
+  width: 100%;
+  background: #ddd9d3;
+  overflow: hidden;
+}
+
+.hero__watermark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 10rem;
+  font-weight: 800;
+  color: rgba(0, 0, 0, 0.045);
+  letter-spacing: 0.12em;
+  pointer-events: none;
+  z-index: 1;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.hero__image {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center top;
+  max-height: 440px;
+}
+
+.hero__share {
+  position: absolute;
+  top: 14px;
+  left: 14px;
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 6px;
-  width: 100%;
-  padding: 10px;
-  background: var(--dark);
+  gap: 5px;
+  padding: 7px 14px;
+  background: rgba(58, 58, 58, 0.82);
   color: #fff;
   border: none;
+  border-radius: 20px;
   font-family: inherit;
-  font-size: 0.9rem;
+  font-size: 0.82rem;
   font-weight: 500;
   cursor: pointer;
+  z-index: 3;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  transition:
+    background 0.2s ease,
+    transform 0.15s ease;
 }
 
-.share-bar:active {
-  opacity: 0.85;
+.hero__share:hover {
+  background: rgba(58, 58, 58, 0.95);
 }
 
-.share-bar svg {
+.hero__share:active {
+  transform: scale(0.95);
+}
+
+.hero__share svg {
   color: #25d366;
+  flex-shrink: 0;
 }
 
 /* ─── Actions Grid (3 col) ─── */
@@ -330,7 +419,7 @@ button.action {
 }
 
 /* ═══════════════════════════════
-   Superpower Animations
+   Animations
    ═══════════════════════════════ */
 
 /* ─── Keyframes ─── */
@@ -399,7 +488,7 @@ button.action {
   animation: fadeIn 0.6s ease-out both;
 }
 
-.top-header__logo {
+.top-header__brand {
   animation: fadeInUp 0.5s ease-out 0.1s both;
 }
 
@@ -411,8 +500,13 @@ button.action {
   animation: fadeInUp 0.5s ease-out 0.35s both;
 }
 
-.share-bar {
-  animation: fadeIn 0.4s ease-out 0.4s both;
+/* ─── Hero Reveal ─── */
+.hero {
+  animation: fadeIn 0.5s ease-out 0.35s both;
+}
+
+.hero__share {
+  animation: fadeInUp 0.4s ease-out 0.5s both;
 }
 
 /* ─── Action Grid Stagger ─── */
@@ -420,44 +514,44 @@ button.action {
   animation: fadeInUp 0.45s ease-out both;
 }
 .action:nth-child(1) {
-  animation-delay: 0.3s;
+  animation-delay: 0.4s;
 }
 .action:nth-child(2) {
-  animation-delay: 0.38s;
+  animation-delay: 0.48s;
 }
 .action:nth-child(3) {
-  animation-delay: 0.46s;
+  animation-delay: 0.56s;
 }
 .action:nth-child(4) {
-  animation-delay: 0.54s;
+  animation-delay: 0.64s;
 }
 .action:nth-child(5) {
-  animation-delay: 0.62s;
+  animation-delay: 0.72s;
 }
 .action:nth-child(6) {
-  animation-delay: 0.7s;
+  animation-delay: 0.8s;
 }
 
 /* ─── Dark Section Reveal ─── */
 .dark-section {
-  animation: fadeIn 0.6s ease-out 0.6s both;
+  animation: fadeIn 0.6s ease-out 0.7s both;
 }
 
 .dark-section__name {
-  animation: slideInFromRight 0.5s ease-out 0.7s both;
+  animation: slideInFromRight 0.5s ease-out 0.8s both;
 }
 
 .dark-section__about {
-  animation: fadeInUp 0.5s ease-out 0.85s both;
+  animation: fadeInUp 0.5s ease-out 0.95s both;
 }
 
 /* ─── Lead Form Reveal ─── */
 .lead {
-  animation: fadeInUp 0.5s ease-out 0.9s both;
+  animation: fadeInUp 0.5s ease-out 1s both;
 }
 
 .call-bar {
-  animation: fadeIn 0.4s ease-out 1s both;
+  animation: fadeIn 0.4s ease-out 1.1s both;
 }
 
 /* ─── Logo Shimmer ─── */
@@ -488,20 +582,6 @@ button.action {
 .action:active {
   transform: scale(0.93) translateY(0);
   box-shadow: none;
-}
-
-.share-bar {
-  transition:
-    background 0.2s ease,
-    transform 0.15s ease;
-}
-
-.share-bar:hover {
-  background: #444;
-}
-
-.share-bar:active {
-  transform: scale(0.98);
 }
 
 /* ─── Submit Button Pulse ─── */
@@ -553,7 +633,7 @@ button.action {
 /* ─── Divider Grow Animation ─── */
 .dark-section__divider {
   transform-origin: center;
-  animation: growWidth 0.6s ease-out 0.95s both;
+  animation: growWidth 0.6s ease-out 1.05s both;
 }
 
 @keyframes growWidth {
