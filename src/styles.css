@@ -195,7 +195,7 @@ a {
   width: 100%;
   display: block;
   object-fit: cover;
-  object-position: center top;
+  object-position: center 15%;
   max-height: 440px;
 }
 
@@ -332,6 +332,14 @@ button.action {
 .lead {
   padding: 24px 20px;
   background: var(--bg);
+}
+
+.lead__title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text);
+  text-align: center;
+  margin-bottom: 14px;
 }
 
 .lead__form {

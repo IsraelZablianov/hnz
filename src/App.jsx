@@ -12,6 +12,9 @@ const NAME_EN = "Hila Noah Zablianov";
 const TITLE_HE = "משרד רואי חשבון";
 const WA_TEXT = "היי, אשמח לשמוע פרטים על השירותים שלך";
 
+// Google Apps Script deployment URL — replace with the real URL after deploying
+const GOOGLE_SCRIPT_URL = "";
+
 const actions = [
   {
     label: "הוסף לאנשי הקשר",
@@ -125,15 +128,38 @@ function handleShare() {
 export default function App() {
   const [formData, setFormData] = useState({ name: "", phone: "" });
   const [sent, setSent] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setSubmitting(true);
+
+    // 1. Save lead to Google Sheet (fire-and-forget — don't block WhatsApp)
+    if (GOOGLE_SCRIPT_URL) {
+      try {
+        await fetch(GOOGLE_SCRIPT_URL, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name: formData.name,
+            phone: formData.phone,
+          }),
+        });
+      } catch {
+        // Sheet write failed — that's OK, WhatsApp still opens
+      }
+    }
+
+    // 2. Open WhatsApp with the lead message
     const msg = `שלום, השארתי פרטים בכרטיס הביקור:\nשם: ${formData.name}\nטלפון: ${formData.phone}`;
     window.open(
       `https://wa.me/${PHONE_INTL}?text=${encodeURIComponent(msg)}`,
       "_blank",
     );
+
     setSent(true);
+    setSubmitting(false);
   };
 
   return (
@@ -248,8 +274,8 @@ export default function App() {
 
       {/* ── Lead Form ── */}
       <section className="lead" aria-labelledby="contact-form-heading">
-        <h2 id="contact-form-heading" className="visually-hidden">
-          השאירו פרטים ונחזור אליכם
+        <h2 id="contact-form-heading" className="lead__title">
+          צרו איתי קשר
         </h2>
         {!sent ? (
           <form
@@ -285,8 +311,12 @@ export default function App() {
                 setFormData((d) => ({ ...d, phone: e.target.value }))
               }
             />
-            <button type="submit" className="lead__submit">
-              שלח
+            <button
+              type="submit"
+              className="lead__submit"
+              disabled={submitting}
+            >
+              {submitting ? "שולח..." : "שלח"}
             </button>
           </form>
         ) : (
