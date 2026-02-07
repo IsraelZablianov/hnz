@@ -13,7 +13,7 @@ const TITLE_HE = "משרד רואי חשבון";
 const WA_TEXT = "היי, אשמח לשמוע פרטים על השירותים שלך";
 
 // Google Apps Script deployment URL — replace with the real URL after deploying
-const GOOGLE_SCRIPT_URL = "";
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxOgbFHv4Q81iXbCvxb8-V1QqKSk_J7cOO-kcRst8fH9GrvPJ-8vJiTABW4s99EfcOF/exec";
 
 const actions = [
   {
