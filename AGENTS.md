@@ -95,7 +95,8 @@ const WA_TEXT = "היי, אשמח לשמוע פרטים על השירותים ש
 | `index.html`                   | HTML shell with RTL, meta tags, JSON-LD, Google Fonts      |
 | `public/vcard.vcf`             | vCard for "Add to Contacts" action                         |
 | `public/CNAME`                 | Custom domain config for GitHub Pages                      |
-| `public/og-image.png`          | Open Graph / social sharing preview image                  |
+| `public/og-image.html`         | OG image template (screenshot at 1200x630 → og-image.png) |
+| `public/og-image.png`          | Open Graph / social sharing preview (generated screenshot) |
 | `public/robots.txt`            | Search engine crawl rules                                  |
 | `public/site.webmanifest`      | PWA web app manifest                                       |
 | `public/sitemap.xml`           | Sitemap for SEO                                            |
@@ -117,6 +118,23 @@ const WA_TEXT = "היי, אשמח לשמוע פרטים על השירותים ש
 - **Build output**: `dist/` directory (gitignored)
 - **Registry**: CI uses public npm; local uses other registry from `~/.npmrc`
 - **Full details**: See [docs/deployment.md](docs/deployment.md)
+
+---
+
+## Updating the Hero Image
+
+When replacing the profile photo:
+
+1. **Replace** `src/assets/hila-hero.png` with the new image
+2. **Regenerate OG image** — the social sharing preview must be updated too:
+   - Temporarily copy the new hero image to `public/hila-hero.png` (needed by the OG template)
+   - Serve `public/` locally (e.g. `npx serve public -p 3456`)
+   - Open `http://localhost:3456/og-image.html` at **1200x630** viewport
+   - Screenshot the page and save as `public/og-image.png`
+   - **Remove** the temporary `public/hila-hero.png` (it must NOT be committed — only `src/assets/` holds the hero image)
+3. **Adjust `object-position`** in `public/og-image.html` if the face framing in the circular crop needs tweaking
+
+> **Why the copy?** `og-image.html` is a standalone HTML file in `public/` used only for screenshot generation. It references `hila-hero.png` as a relative path. The actual app imports the image from `src/assets/` via Vite bundling.
 
 ---
 

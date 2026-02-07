@@ -166,7 +166,9 @@ export default function App() {
         <p className="top-header__services" itemProp="description">
           עצמאים ובעלי עסקים ◇ פתיחת תיקים ◇ הנהלת חשבונות דיגיטלית
           <br />
-          דיווחים שוטפים ◇ ייעוץ וליווי שוטף ◇ החזרי מס לשכירים
+          דיווחים שוטפים ◇ דוחות שנתיים ◇ הצהרות הון
+          <br />
+          ייעוץ וליווי שוטף ◇ החזרי מס לשכירים
         </p>
         <p className="top-header__contact">
           <a href={`mailto:${EMAIL}`} itemProp="email" aria-label="שלח אימייל">
@@ -238,7 +240,8 @@ export default function App() {
           <div className="dark-section__divider" />
           <p itemProp="description">
             עצמאים ובעלי עסקים ◇ פתיחת תיקים ◇ הנהלת חשבונות דיגיטלית ◇ דיווחים
-            שוטפים ◇ ייעוץ וליווי שוטף ◇ החזרי מס לשכירים
+            שוטפים ◇ דוחות שנתיים ◇ הצהרות הון ◇ ייעוץ וליווי שוטף ◇ החזרי מס
+            לשכירים
           </p>
         </article>
       </section>
