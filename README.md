@@ -7,7 +7,7 @@ Built with React 19 + Vite, optimized for instant loading and native-like intera
 ## Features
 
 - **One-tap actions** — Call, WhatsApp, save contact, Facebook, Instagram, share
-- **Lead capture form** — Collects name & phone, sends via WhatsApp
+- **Lead capture form** — Collects name & phone, saves to Google Sheet and sends via WhatsApp
 - **vCard download** — Add to contacts instantly
 - **Social links** — Direct links to Facebook and Instagram profiles
 - **Web Share API** — Native sharing with clipboard fallback
@@ -125,6 +125,22 @@ const TITLE_HE = "משרד רואי חשבון";
 ```
 
 Update these values, `public/vcard.vcf`, and the structured data in `index.html` to customize for a different person.
+
+## Google Sheets Lead Integration
+
+The contact form saves every submission to a Google Sheet via Google Apps Script, then opens WhatsApp with the lead details.
+
+**How it works:**
+1. User fills in name + phone, clicks "שלח"
+2. Form POSTs data to a Google Apps Script web app (URL stored in `GOOGLE_SCRIPT_URL` constant)
+3. The script appends a row to the [HNZ Leads spreadsheet](https://docs.google.com/spreadsheets/d/1XezCmGaLsQM72HL3kgjl8jhzkdoG6T3XOet4L5g_7eI) with name, phone, and timestamp
+4. WhatsApp opens with the lead message (regardless of whether the sheet write succeeded)
+
+**Sheet columns:** שם | טלפון | תאריך
+
+**Cost:** Free (Google Apps Script free tier — up to 20,000 requests/day)
+
+**If the Apps Script URL changes** (e.g. after redeploying), update the `GOOGLE_SCRIPT_URL` constant in `src/App.jsx`.
 
 ## License
 

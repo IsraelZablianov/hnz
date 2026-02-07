@@ -37,7 +37,7 @@ public/site.webmanifest  → PWA manifest
 
 - **No routing** — single-page app
 - **No state management** — `useState` only
-- **No API calls** — fully client-side
+- **One external call** — POST to Google Apps Script on form submit (saves leads to Google Sheet)
 - **No TypeScript** — plain JS/JSX
 
 ---
@@ -59,6 +59,7 @@ const NAME_HE = "הילה נח זבליאנוב";
 const NAME_EN = "Hila Noah Zablianov";
 const TITLE_HE = "משרד רואי חשבון";
 const WA_TEXT = "היי, אשמח לשמוע פרטים על השירותים שלך";
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/...exec";
 ```
 
 ### Components
@@ -121,6 +122,21 @@ const WA_TEXT = "היי, אשמח לשמוע פרטים על השירותים ש
 
 ---
 
+## Google Sheets Lead Integration
+
+The lead form (`handleSubmit` in `App.jsx`) does two things on submit:
+
+1. **POSTs to Google Apps Script** — saves name, phone, and timestamp to the [HNZ Leads spreadsheet](https://docs.google.com/spreadsheets/d/1XezCmGaLsQM72HL3kgjl8jhzkdoG6T3XOet4L5g_7eI)
+2. **Opens WhatsApp** — with a pre-filled message containing the lead's details
+
+The POST uses `mode: "no-cors"` (Apps Script returns an opaque response). If the sheet write fails, WhatsApp still opens — it's fire-and-forget.
+
+The Apps Script URL is stored in the `GOOGLE_SCRIPT_URL` constant. If Hila redeploys the script, update this constant.
+
+The Apps Script code (deployed on Hila's Google account) is a simple `doPost` handler that parses the JSON body and appends a row to the active sheet.
+
+---
+
 ## Updating the Hero Image
 
 When replacing the profile photo:
@@ -145,7 +161,7 @@ When replacing the profile photo:
 - Keep it a single-page app — no routing needed
 - Use CSS animations with `prefers-reduced-motion` support
 - Test on mobile viewport (480px max-width)
-- Keep the WhatsApp integration for lead capture
+- Keep the WhatsApp + Google Sheet integration for lead capture
 - Maintain RTL support in all new elements
 
 ### Don't
@@ -153,6 +169,6 @@ When replacing the profile photo:
 - Don't add TypeScript — keep it simple JS
 - Don't add CSS frameworks (Tailwind, Bootstrap, etc.)
 - Don't add state management libraries
-- Don't add server-side logic — this is a static site
+- Don't add server-side logic — this is a static site (Google Apps Script is the only external service)
 - Don't commit `node_modules/` or `dist/`
 - Don't hardcode contact info outside the constants block
